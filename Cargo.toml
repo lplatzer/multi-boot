@@ -9,6 +9,15 @@ repository = "https://github.com/lplatzer/multi-boot"
 keywords = ["usb", "boot", "iso", "grub", "uefi"]
 categories = ["command-line-utilities"]
 
+[[bin]]
+name = "multi-boot"
+path = "src/main.rs"
+
+[[bin]]
+name = "multi-boot-gui"
+path = "src/gui/main.rs"
+required-features = ["gui"]
+
 [dependencies]
 clap = { version = "4", features = ["derive", "cargo"] }
 anyhow = "1"
@@ -22,5 +31,14 @@ regex = "1"
 byte-unit = "5"
 libc = "0.2"
 
+# GUI dependencies (optional)
+eframe = { version = "0.27", optional = true }
+poll-promise = { version = "0.3", optional = true }
+rfd = { version = "0.14", optional = true }
+
 [dev-dependencies]
 tempfile = "3"
+
+[features]
+default = []
+gui = ["eframe", "poll-promise", "rfd"]

@@ -1,6 +1,6 @@
 # Multi-Boot USB Tool
 
-A Rust-based command-line tool to create bootable USB drives that can boot multiple ISO images on both BIOS/Legacy and UEFI systems.
+A Rust-based tool to create bootable USB drives that can boot multiple ISO images on both BIOS/Legacy and UEFI systems. Available in both CLI and GUI versions.
 
 ## Features
 
@@ -10,9 +10,26 @@ A Rust-based command-line tool to create bootable USB drives that can boot multi
 - **Large File Support**: Uses exFAT for data partition to support ISOs >4GB
 - **Auto-Configuration**: Automatically detects ISO types and generates appropriate boot entries
 - **Safe Operations**: Verifies devices are removable and confirms destructive operations
-- **Simple CLI**: Easy-to-use command-line interface
+- **Dual Interface**:
+  - **CLI**: Powerful command-line interface for automation and scripting
+  - **GUI**: User-friendly graphical interface for desktop users
 
 ## Quick Start
+
+### GUI (Recommended for Desktop Users)
+
+```bash
+# Run the GUI application
+sudo cargo run --features gui --bin multi-boot-gui
+```
+
+The GUI provides a point-and-click interface for:
+- Selecting USB devices
+- Initializing devices
+- Adding and removing ISOs
+- Real-time progress indicators
+
+### CLI (For Automation and Scripting)
 
 ```bash
 # Check system requirements
@@ -64,8 +81,15 @@ sudo pacman -S base-devel parted dosfstools exfatprogs \
 ```bash
 git clone https://github.com/lplatzer/multi-boot.git
 cd multi-boot
+
+# Build CLI only (smaller, faster)
 cargo build --release
 sudo cp target/release/multi-boot /usr/local/bin/
+
+# Build with GUI (recommended for desktop)
+cargo build --release --features gui
+sudo cp target/release/multi-boot /usr/local/bin/
+sudo cp target/release/multi-boot-gui /usr/local/bin/
 ```
 
 ## Usage

@@ -1,7 +1,7 @@
 use std::io;
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+#[derive(Error, Debug, Clone)]
 pub enum MultiBootError {
     #[error("Device not found: {0}")]
     DeviceNotFound(String),
@@ -40,7 +40,7 @@ pub enum MultiBootError {
     Cancelled,
 
     #[error("IO error: {0}")]
-    Io(#[from] io::Error),
+    Io(String),
 
     #[error("Parse error: {0}")]
     ParseError(String),
@@ -53,3 +53,10 @@ pub enum MultiBootError {
 }
 
 pub type Result<T> = std::result::Result<T, MultiBootError>;
+
+// Implement From<io::Error> manually since io::Error doesn't implement Clone
+impl From<io::Error> for MultiBootError {
+    fn from(err: io::Error) -> Self {
+        MultiBootError::Io(err.to_string())
+    }
+}
