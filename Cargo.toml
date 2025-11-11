@@ -1,0 +1,26 @@
+[package]
+name = "multi-boot"
+version = "0.1.0"
+edition = "2021"
+authors = ["Multi-Boot Contributors"]
+description = "A tool to create multi-ISO bootable USB drives with BIOS and UEFI support"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/lplatzer/multi-boot"
+keywords = ["usb", "boot", "iso", "grub", "uefi"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+clap = { version = "4", features = ["derive", "cargo"] }
+anyhow = "1"
+thiserror = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+walkdir = "2"
+indicatif = "0.17"
+regex = "1"
+byte-unit = "5"
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
